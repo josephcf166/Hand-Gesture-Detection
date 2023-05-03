@@ -3,7 +3,7 @@ from keras.layers import Conv2D, Flatten, GlobalAveragePooling2D, MaxPooling2D, 
 from keras.regularizers import l2
 from keras.models import Model
 
-INPUT_SIZE= (224, 224, 3)
+INPUT_SIZE= (448, 448, 3)
 
 DARKNET19_ARCHITECTURE = [
     # (number of filters, size, stride, padding)
@@ -56,10 +56,10 @@ def build_model(architecture, input_shape, num_of_classes=2):
     x = GlobalAveragePooling2D()(x)
     x = Dropout(0.5)(x)
 
-    bbox = Dense(4, activation="linear", name="bbox")(x)
-    label = Dense(1, activation="sigmoid", name="label")(x)
+    bbox = Dense(4, activation="sigmoid", name="bbox")(x)
+    # label = Dense(1, activation="sigmoid", name="label")(x)
     
-    model = Model([inputs], [bbox, label])
+    model = Model([inputs], [bbox])
     return model
 
 
