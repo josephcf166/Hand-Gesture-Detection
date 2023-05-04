@@ -56,7 +56,7 @@ def build_model(architecture, input_shape, num_of_classes=2):
     x = GlobalAveragePooling2D()(x)
     x = Dropout(0.5)(x)
 
-    bbox = Dense(4, activation="sigmoid", name="bbox")(x)
+    bbox = Dense(4, activation="linear", name="bbox")(x)
     # label = Dense(1, activation="sigmoid", name="label")(x)
     
     model = Model([inputs], [bbox])
